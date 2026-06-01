@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Крипто Әліппе</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo">₿</div>
+      <div>
+        <div class="brand">Крипто Әліппе</div>
+        <div class="tagline">@assila.crypto</div>
+      </div>
+    </div>
+    <div class="progress-label">
+      <span>Прогресс</span>
+      <span id="prog-text">0 / 8 сабақ</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="prog-fill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('lessons')">📚 Сабақтар</div>
+    <div class="tab" onclick="showTab('stats')">📊 Нәтиже</div>
+  </div>
+
+  <!-- LESSONS TAB -->
+  <div id="tab-lessons" class="content"></div>
+
+  <!-- STATS TAB -->
+  <div id="tab-stats" class="stats-section" style="display:none">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-num" id="s-done">0</div>
+        <div class="stat-label">Аяқталған сабақ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-num" id="s-streak">0</div>
+        <div class="stat-label">Күндік серия</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-num" id="s-time">0</div>
+        <div class="stat-label">Мин оқыдым</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-num" id="s-ach">0</div>
+        <div class="stat-label">Жетістік</div>
+      </div>
+    </div>
+    <div id="achievements-list"></div>
+  </div>
+
+</div>
+
+<!-- DETAIL VIEW -->
+<div class="detail-view" id="detail-view">
+  <div class="detail-header">
+    <button class="back-btn" onclick="closeDetail()">← Артқа</button>
+    <div class="detail-title" id="detail-heading">Сабақ мазмұны</div>
+  </div>
+  <div class="detail-body" id="detail-body"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
