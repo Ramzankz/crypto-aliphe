@@ -281,3 +281,6 @@ function showTab(tab) {
 // Инициализация
 renderLessons();
 renderStats();
+function startLearning() {
+  alert("Добро пожаловать в обучение крипте 🚀");
+}
