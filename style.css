@@ -375,3 +375,20 @@ body {
 
 .ach-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
 .ach-sub   { font-size: 12px; color: #8a9bb0; }
+.welcome-card{
+  background:#fff;
+  margin:12px;
+  padding:16px;
+  border-radius:16px;
+  border:1px solid #e8ecf0;
+}
+
+.welcome-card h2{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.welcome-card p{
+  color:#8a9bb0;
+  font-size:14px;
+}
