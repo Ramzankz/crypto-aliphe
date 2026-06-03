@@ -128,7 +128,8 @@ function saveProgress(p) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch {}
 }
 
-let progress = loadProgress();
+let progress = { completed: [], streak: 0, totalTime: 0, lastDate: null, paid: false };
+try { progress = loadProgress(); } catch(e) { console.log("storage error", e); }
 
 function startApp() {
   document.getElementById('screen-onboarding').style.display = 'none';
