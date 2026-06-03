@@ -2,6 +2,7 @@ const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
 const FREE_LESSONS = [1, 2];
+const COMMUNITY_LINK = "https://t.me/c/3633850155/1";
 
 const LESSONS = [
   {
@@ -12,6 +13,7 @@ const LESSONS = [
     video: "q-5et-862Bg",
     tip: "Тіркелу кезінде міндетті түрде 2FA қосыңыз — бұл сіздің аккаунтыңызды қорғайтын ең маңызды қадам.",
     steps: ["Binance Kazakhstan сайтына (binance.kz) кіру", "Email немесе телефон арқылы тіркелу", "Қауіпсіз құпия сөз қою", "2FA қосу — Google Authenticator ұсынылады"],
+    homework: "Binance-қа тіркеліп, аккаунт ашылғанын скриншот түсіріп, комьюнити чатқа жібер ✅",
     links: [
       { label: "🔗 Binance-ға тіркелу (реферал)", url: "https://www.binance.com/join?ref=ASSILA" },
       { label: "🔗 Bybit Kazakhstan-ға тіркелу", url: "https://partner.bybit.kz/b/ASSILA" }
@@ -25,6 +27,7 @@ const LESSONS = [
     video: "pxM_vBP4ge4",
     tip: "KYC өтпей ешқандай ақша шығара алмайсыз. Бұл заңды талап, қорықпаңыз — деректеріңіз қауіпсіз.",
     steps: ["Профиль → Верификация бөліміне кіру", "Жеке куәлік немесе паспорт фотосын жүктеу", "Нақты уақыт селфи түсіру", "Нәтижені күту (1–24 сағат)"],
+    homework: "KYC верификациядан өтіп, 'Верификацияланды' деген жазуды скриншот түсіріп, чатқа жібер ✅",
     links: []
   },
   {
@@ -35,6 +38,7 @@ const LESSONS = [
     video: "EZTmK5N_j_E",
     tip: "P2P-де тек рейтингі 95%+ сатушылардан сатып алыңыз. Асықпаңыз — сенімді адаммен жұмыс жасаңыз.",
     steps: ["P2P бөліміне кіру", "Freedom Bank картасын қосу", "Сенімді сатушыны таңдау (рейтинг 95%+)", "USDT сатып алу және балансты тексеру"],
+    homework: "1000 ₸-ден кем емес USDT сатып алып, балансты скриншот түсіріп, чатқа жібер ✅",
     links: []
   },
   {
@@ -45,6 +49,7 @@ const LESSONS = [
     video: "DvXCg3J3uEk",
     tip: "Алғашқы сатып алуды өте кішкентай сомадан бастаңыз. Тәжірибе алу үшін 1000-2000 ₸ жеткілікті.",
     steps: ["Spot Wallet-ті ашу", "BTC/USDT жұбын таңдау", "Market vs Limit ордер айырмашылығы", "Бірінші сатып алуды жасау"],
+    homework: "Кез келген монетаны Spot-та сатып алып, ордер тарихын скриншот түсіріп, чатқа жібер ✅",
     links: []
   },
   {
@@ -55,6 +60,7 @@ const LESSONS = [
     video: "rQiE___tJwg",
     tip: "Алғаш рет шығарғанда кішкентай соманы тексеріп алыңыз. Бәрі дұрыс болса ғана үлкен соманы жіберіңіз.",
     steps: ["P2P бөліміне кіру → Сату (Sell)", "USDT мөлшерін енгізу", "Freedom Bank сатып алушыны таңдау", "Аударымды растап, KZT алу"],
+    homework: "USDT-ті теңгеге айырбастап, Freedom Bank картасына түскенін растап, чатқа жібер ✅",
     links: []
   },
   {
@@ -65,6 +71,7 @@ const LESSONS = [
     video: "Rf0RAs24HOA",
     tip: "Flexible Earn-ді таңдаңыз — кез келген уақытта шығара аласыз. Locked жоғарырақ % береді, бірақ ақша тіркеледі.",
     steps: ["Earn → Simple Earn бөліміне кіру", "APY (жылдық пайыз) дегенді түсіну", "Flexible vs Locked айырмашылығы", "USDT-ні депозитке салу"],
+    homework: "Simple Earn-ге кем дегенде 1 USDT салып, APY пайызын жазып, чатқа жібер ✅",
     links: []
   },
   {
@@ -75,6 +82,7 @@ const LESSONS = [
     video: "cYYyTRs97Nc",
     tip: "Binance ID арқылы аударым — ең жылдам және тегін жол. Желі комиссиясы жоқ!",
     steps: ["Профиль → Binance ID-ді табу", "Wallet → Send → Binance ID таңдау", "Алушының ID-ін дұрыс енгізу", "Аударым растау"],
+    homework: "Комьюнити мүшесіне Binance ID арқылы 1 USDT жіберіп, транзакцияны скриншот түсір ✅",
     links: []
   },
   {
@@ -85,6 +93,7 @@ const LESSONS = [
     video: "YbPJdLeS3CM",
     tip: "Желіні ҚАТЕ таңдасаңыз — ақшаңыз жоғалуы мүмкін! Жіберер алдында алушы биржасының желісін екі рет тексеріңіз.",
     steps: ["Желілер айырмашылығын түсіну (BEP20 = арзан)", "Алушы биржасының желісін анықтау", "Аудару алдында екі рет тексеру", "Транзакцияны explorer-де тексеру"],
+    homework: "BEP20 желісімен аударым жасап, транзакция хэшін чатқа жібер ✅",
     links: []
   },
   {
@@ -95,6 +104,7 @@ const LESSONS = [
     video: "nhvKFIBa8T4",
     tip: "Фьючерс — тәжірибелілерге арналған. Алдымен споттан бастаңыз. Левередж ақшаны жылдам жоғалтуы мүмкін!",
     steps: ["Futures бөліміне кіру", "Лонг және шорт позицияларын түсіну", "Левередж қалай жұмыс істейді", "Сделка ашу және қауіпсіз жабу"],
+    homework: "Фьючерсте demo режимінде 1 лонг позиция ашып, скриншот түсіріп, чатқа жібер ✅",
     links: []
   }
 ];
@@ -105,7 +115,7 @@ const ACHIEVEMENTS = [
   { icon: '🎓', title: 'Крипто Студент', sub: 'Барлық 9 сабақты аяқтадың', req: 9 },
 ];
 
-const STORAGE_KEY = 'crypto_aliphe_v3';
+const STORAGE_KEY = 'crypto_aliphe_v4';
 
 function loadProgress() {
   try {
@@ -144,11 +154,11 @@ function renderLessons() {
     const numClass   = isDone ? 'done' : isCurrent ? 'current' : 'locked';
     const numContent = isDone ? '✓' : lesson.num;
     let badgeClass, badgeText;
-    if (isDone)                    { badgeClass = 'badge-done';    badgeText = 'Дайын ✓'; }
-    else if (isFree && isCurrent)  { badgeClass = 'badge-free';    badgeText = '🎁 Тегін'; }
-    else if (isPaywall)            { badgeClass = 'badge-locked';  badgeText = '🔒 Ақылы'; }
-    else if (isCurrent)            { badgeClass = 'badge-current'; badgeText = 'Жаңа'; }
-    else                           { badgeClass = 'badge-locked';  badgeText = '🔒'; }
+    if (isDone)                   { badgeClass = 'badge-done';    badgeText = 'Дайын ✓'; }
+    else if (isFree && isCurrent) { badgeClass = 'badge-free';    badgeText = '🎁 Тегін'; }
+    else if (isPaywall)           { badgeClass = 'badge-locked';  badgeText = '🔒 Ақылы'; }
+    else if (isCurrent)           { badgeClass = 'badge-current'; badgeText = 'Жаңа'; }
+    else                          { badgeClass = 'badge-locked';  badgeText = '🔒'; }
 
     card.innerHTML = `
       <div class="lesson-header">
@@ -160,10 +170,7 @@ function renderLessons() {
         <span class="lesson-badge ${badgeClass}">${badgeText}</span>
       </div>
     `;
-
-    if (!isLocked) {
-      card.onclick = () => isPaywall ? openPaywall() : openDetail(lesson.num);
-    }
+    if (!isLocked) card.onclick = () => isPaywall ? openPaywall() : openDetail(lesson.num);
     container.appendChild(card);
   });
   updateProgressBar();
@@ -187,25 +194,20 @@ function openDetail(num) {
   const linksHTML = lesson.links && lesson.links.length > 0
     ? `<div class="links-section">
         <div class="steps-label">Пайдалы сілтемелер</div>
-        ${lesson.links.map(l => `
-          <a class="ref-link" href="${l.url}" target="_blank">${l.label}</a>
-        `).join('')}
-      </div>`
-    : '';
+        ${lesson.links.map(l => `<a class="ref-link" href="${l.url}" target="_blank">${l.label}</a>`).join('')}
+      </div>` : '';
 
   document.getElementById('detail-body').innerHTML = `
     <div class="detail-num-badge">${num}-сабақ</div>
     <div class="detail-lesson-title">${lesson.title}</div>
     <div class="detail-desc">${lesson.desc}</div>
     <div class="video-wrap">
-      <iframe 
-        src="https://www.youtube.com/embed/${lesson.video}?playsinline=1&rel=0&modestbranding=1" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
+      <iframe src="https://www.youtube.com/embed/${lesson.video}?playsinline=1&rel=0&modestbranding=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
     <div class="assila-tip">
-      <div class="assila-tip-label">Ассиладан кеңес 👩‍💼</div>
+      <div class="assila-tip-label">👩‍💼 Ассиладан кеңес</div>
       <div class="assila-tip-text">${lesson.tip}</div>
     </div>
     <div class="steps-label">Сабақ жоспары</div>
@@ -213,15 +215,25 @@ function openDetail(num) {
       <div class="step-item">
         <div class="step-dot">✓</div>
         <div class="step-text">${s}</div>
-      </div>
-    `).join('')}
+      </div>`).join('')}
     ${linksHTML}
+    <div class="homework-box">
+      <div class="homework-label">📝 Үй жұмысы</div>
+      <div class="homework-text">${lesson.homework}</div>
+      <a class="homework-btn" href="${COMMUNITY_LINK}" target="_blank">
+        📤 Чатқа жіберу
+      </a>
+    </div>
     ${isDone
-      ? `<button class="done-btn">✓ Аяқталды</button>`
+      ? `<button class="done-btn">✓ Сабақ аяқталды</button>`
       : `<button class="start-btn" onclick="markDone(${num})">Сабақты аяқтадым ✓</button>`
     }
+    <a class="community-btn" href="${COMMUNITY_LINK}" target="_blank">
+      💬 Сұрақ қою — Комьюнити чат
+    </a>
   `;
   document.getElementById('detail-view').classList.add('open');
+  document.getElementById('detail-view').scrollTop = 0;
 }
 
 function closeDetail() {
