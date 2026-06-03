@@ -8,75 +8,115 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="app">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="welcome-card">
-  <h2>👋 Қош келдіңіз!</h2>
-  <p>Бүгін 1 сабақ аяқтап, прогресті арттырыңыз.</p>
+<!-- ONBOARDING -->
+<div class="screen" id="screen-onboarding">
+  <div class="onboarding">
+    <div class="onboarding-logo">₿</div>
+    <div class="onboarding-brand">Крипто Әліппе</div>
+    <div class="onboarding-tagline">Ассила Crypto Academy</div>
+    <div class="onboarding-title">9 күнде криптоны түсін</div>
+    <div class="onboarding-desc">
+      Binance-тан бастап фьючерске дейін — қазақша, түсінікті, қауіпсіз. 
+      7 жылдық тәжірибе, нақты нәтиже.
+    </div>
+    <div class="onboarding-features">
+      <div class="onboarding-feat">✅ Нөлден бастайсың</div>
+      <div class="onboarding-feat">✅ Ақшаңды жоғалтпайсың</div>
+      <div class="onboarding-feat">✅ Қазақша түсіндіреміз</div>
+    </div>
+    <div class="onboarding-free">🎁 1-2 сабақ — тегін</div>
+    <button class="onboarding-btn" onclick="startApp()">Оқуды бастау →</button>
+    <div class="onboarding-author">@assila.crypto · 12K оқырман</div>
+  </div>
 </div>
-    <div class="header-top">
-      <div class="logo">₿</div>
-      <div>
-        <div class="brand">Крипто Әліппе</div>
-        <div class="tagline">@assila.crypto</div>
+
+<!-- MAIN APP -->
+<div class="screen" id="screen-main" style="display:none">
+  <div class="app">
+    <div class="header">
+      <div class="header-top">
+        <div class="logo">₿</div>
+        <div>
+          <div class="brand">Крипто Әліппе</div>
+          <div class="tagline">@assila.crypto</div>
+        </div>
+      </div>
+      <div class="progress-label">
+        <span id="prog-label-text">Оқуды бастаңыз 👇</span>
+        <span id="prog-text">0 / 9 сабақ</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="prog-fill" style="width: 0%"></div>
       </div>
     </div>
-    <div class="progress-label">
-      <span>Прогресс</span>
-      <span id="prog-text">0 / 8 сабақ</span>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('lessons')">📚 Сабақтар</div>
+      <div class="tab" onclick="showTab('stats')">📊 Нәтиже</div>
     </div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="prog-fill" style="width: 0%"></div>
+
+    <div id="tab-lessons" class="content"></div>
+
+    <div id="tab-stats" class="stats-section" style="display:none">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-num" id="s-done">0</div>
+          <div class="stat-label">Аяқталған сабақ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-num" id="s-streak">0</div>
+          <div class="stat-label">Күндік серия</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-num" id="s-time">0</div>
+          <div class="stat-label">Мин оқыдым</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-num" id="s-ach">0</div>
+          <div class="stat-label">Жетістік</div>
+        </div>
+      </div>
+      <div id="achievements-list"></div>
     </div>
   </div>
-
-  <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('lessons')">📚 Сабақтар</div>
-    <div class="tab" onclick="showTab('stats')">📊 Нәтиже</div>
-  </div>
-
-  <!-- LESSONS TAB -->
-  <div id="tab-lessons" class="content"></div>
-
-  <!-- STATS TAB -->
-  <div id="tab-stats" class="stats-section" style="display:none">
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="stat-icon">✅</div>
-        <div class="stat-num" id="s-done">0</div>
-        <div class="stat-label">Аяқталған сабақ</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🔥</div>
-        <div class="stat-num" id="s-streak">0</div>
-        <div class="stat-label">Күндік серия</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">⏱️</div>
-        <div class="stat-num" id="s-time">0</div>
-        <div class="stat-label">Мин оқыдым</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🏆</div>
-        <div class="stat-num" id="s-ach">0</div>
-        <div class="stat-label">Жетістік</div>
-      </div>
-    </div>
-    <div id="achievements-list"></div>
-  </div>
-
 </div>
 
 <!-- DETAIL VIEW -->
 <div class="detail-view" id="detail-view">
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">← Артқа</button>
-    <div class="detail-title" id="detail-heading">Сабақ мазмұны</div>
+    <div class="detail-title" id="detail-heading">Сабақ</div>
   </div>
   <div class="detail-body" id="detail-body"></div>
+</div>
+
+<!-- PAYWALL -->
+<div class="detail-view" id="paywall-view">
+  <div class="detail-header">
+    <button class="back-btn" onclick="closePaywall()">← Артқа</button>
+    <div class="detail-title">Толық курс</div>
+  </div>
+  <div class="paywall-body">
+    <div class="paywall-icon">🔐</div>
+    <div class="paywall-title">Толық курсты ашу</div>
+    <div class="paywall-desc">Сізде 2 тегін сабақ өтті. Қалған 7 сабақты ашу үшін курсты сатып алыңыз.</div>
+    <div class="paywall-price">350 000 ₸</div>
+    <div class="paywall-includes">
+      <div class="paywall-item">✅ 9 видео сабақ</div>
+      <div class="paywall-item">✅ Ассиламен жеке байланыс</div>
+      <div class="paywall-item">✅ Комьюнитиге кіру</div>
+      <div class="paywall-item">✅ Zoom эфирлер</div>
+    </div>
+    <a class="paywall-btn" href="https://t.me/asilekcrypto" target="_blank">
+      Төлем жасау → Telegram арқылы
+    </a>
+    <div class="paywall-note">Kaspi Pay арқылы төлем · Қолдау: @assila.crypto</div>
+  </div>
 </div>
 
 <script src="app.js"></script>
