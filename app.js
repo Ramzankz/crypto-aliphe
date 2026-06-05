@@ -1,293 +1,244 @@
-const tg = window.Telegram && window.Telegram.WebApp;
-if (tg) { tg.ready(); tg.expand(); }
+// Telegram init
+try {
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+  }
+} catch(e) {}
 
-const FREE_LESSONS = [1, 2];
-const COMMUNITY_LINK = "https://t.me/c/3633850155/1";
+// ── DATA ──
+var FREE = [1, 2];
+var CHAT = "https://t.me/c/3633850155/1";
 
-const LESSONS = [
-  {
-    num: 1,
-    title: "Binance-ға тіркелу",
-    sub: "Аккаунт ашу · ~1 мин",
-    desc: "Binance KZ-ға дұрыс және қауіпсіз тіркелуді үйренесіз.",
-    video: "q-5et-862Bg",
-    tip: "Тіркелу кезінде міндетті түрде 2FA қосыңыз — бұл сіздің аккаунтыңызды қорғайтын ең маңызды қадам.",
-    steps: ["Binance Kazakhstan сайтына (binance.kz) кіру", "Email немесе телефон арқылы тіркелу", "Қауіпсіз құпия сөз қою", "2FA қосу — Google Authenticator ұсынылады"],
-    homework: "Binance-қа тіркеліп, аккаунт ашылғанын скриншот түсіріп, комьюнити чатқа жібер ✅",
-    links: [
-      { label: "🔗 Binance-ға тіркелу (реферал)", url: "https://www.binance.com/join?ref=ASSILA" },
-      { label: "🔗 Bybit Kazakhstan-ға тіркелу", url: "https://partner.bybit.kz/b/ASSILA" }
-    ]
+var LESSONS = [
+  { n:1, title:"Binance-ға тіркелу", sub:"~1 мин", video:"q-5et-862Bg",
+    tip:"Тіркелу кезінде міндетті түрде 2FA қосыңыз.",
+    steps:["Binance Kazakhstan сайтына (binance.kz) кіру","Email немесе телефон арқылы тіркелу","Қауіпсіз құпия сөз қою","2FA қосу — Google Authenticator"],
+    hw:"Binance-қа тіркеліп, аккаунт ашылғанын скриншот түсіріп, комьюнити чатқа жібер ✅",
+    links:[{t:"🔗 Binance реферал сілтемесі",u:"https://www.binance.com/join?ref=ASSILA"},{t:"🔗 Bybit Kazakhstan",u:"https://partner.bybit.kz/b/ASSILA"}]
   },
-  {
-    num: 2,
-    title: "Binance аккаунтын верификациялау",
-    sub: "KYC · ~1 мин",
-    desc: "Жеке тұлға ретінде ресми растаудан өтіп, барлық функцияларды ашасыз.",
-    video: "pxM_vBP4ge4",
-    tip: "KYC өтпей ешқандай ақша шығара алмайсыз. Бұл заңды талап, қорықпаңыз — деректеріңіз қауіпсіз.",
-    steps: ["Профиль → Верификация бөліміне кіру", "Жеке куәлік немесе паспорт фотосын жүктеу", "Нақты уақыт селфи түсіру", "Нәтижені күту (1–24 сағат)"],
-    homework: "KYC верификациядан өтіп, 'Верификацияланды' деген жазуды скриншот түсіріп, чатқа жібер ✅",
-    links: []
+  { n:2, title:"Аккаунтты верификациялау", sub:"~1 мин", video:"pxM_vBP4ge4",
+    tip:"KYC өтпей ешқандай ақша шығара алмайсыз.",
+    steps:["Профиль → Верификация","Жеке куәлік фотосын жүктеу","Нақты уақыт селфи","Нәтижені күту 1–24 сағат"],
+    hw:"KYC өтіп, 'Верификацияланды' жазуын скриншот түсіріп, чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 3,
-    title: "Теңгені USDT-ге айырбастау",
-    sub: "P2P / Freedom Bank · ~2 мин",
-    desc: "Freedom Bank картасы арқылы Binance-қа теңге салып, USDT-ға заңды айналдырасыз.",
-    video: "EZTmK5N_j_E",
-    tip: "P2P-де тек рейтингі 95%+ сатушылардан сатып алыңыз. Асықпаңыз — сенімді адаммен жұмыс жасаңыз.",
-    steps: ["P2P бөліміне кіру", "Freedom Bank картасын қосу", "Сенімді сатушыны таңдау (рейтинг 95%+)", "USDT сатып алу және балансты тексеру"],
-    homework: "1000 ₸-ден кем емес USDT сатып алып, балансты скриншот түсіріп, чатқа жібер ✅",
-    links: []
+  { n:3, title:"Теңгені USDT-ге айырбастау", sub:"~2 мин", video:"EZTmK5N_j_E",
+    tip:"P2P-де тек рейтингі 95%+ сатушылардан сатып алыңыз.",
+    steps:["P2P бөліміне кіру","Freedom Bank картасын қосу","Сенімді сатушыны таңдау","USDT сатып алу"],
+    hw:"1000 ₸ USDT сатып алып, балансты скриншот түсіріп, чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 4,
-    title: "Binance Spot саудасы",
-    sub: "Spot Trading · ~2 мин",
-    desc: "BTC, ETH және т.б. монеталарды сатып алу және сату логикасын үйренесіз.",
-    video: "DvXCg3J3uEk",
-    tip: "Алғашқы сатып алуды өте кішкентай сомадан бастаңыз. Тәжірибе алу үшін 1000-2000 ₸ жеткілікті.",
-    steps: ["Spot Wallet-ті ашу", "BTC/USDT жұбын таңдау", "Market vs Limit ордер айырмашылығы", "Бірінші сатып алуды жасау"],
-    homework: "Кез келген монетаны Spot-та сатып алып, ордер тарихын скриншот түсіріп, чатқа жібер ✅",
-    links: []
+  { n:4, title:"Binance Spot саудасы", sub:"~2 мин", video:"DvXCg3J3uEk",
+    tip:"Алғашқы сатып алуды кішкентай сомадан бастаңыз.",
+    steps:["Spot Wallet ашу","BTC/USDT жұбын таңдау","Market vs Limit айырмашылығы","Бірінші сатып алу"],
+    hw:"Кез келген монетаны Spot-та сатып алып, ордер тарихын скриншот түсіріп, чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 5,
-    title: "USDT-ті теңгеге шығару",
-    sub: "Вывод · ~2 мин",
-    desc: "Криптоны KZT-ге ауыстырып, Freedom Bank картасына шешіп аласыз.",
-    video: "rQiE___tJwg",
-    tip: "Алғаш рет шығарғанда кішкентай соманы тексеріп алыңыз. Бәрі дұрыс болса ғана үлкен соманы жіберіңіз.",
-    steps: ["P2P бөліміне кіру → Сату (Sell)", "USDT мөлшерін енгізу", "Freedom Bank сатып алушыны таңдау", "Аударымды растап, KZT алу"],
-    homework: "USDT-ті теңгеге айырбастап, Freedom Bank картасына түскенін растап, чатқа жібер ✅",
-    links: []
+  { n:5, title:"USDT-ті теңгеге шығару", sub:"~2 мин", video:"rQiE___tJwg",
+    tip:"Алғаш рет шығарғанда кішкентай соманы тексеріп алыңыз.",
+    steps:["P2P → Сату (Sell)","USDT мөлшерін енгізу","Freedom Bank сатып алушыны таңдау","KZT алу"],
+    hw:"USDT-ті теңгеге айырбастап, Freedom Bank картасына түскенін растап, чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 6,
-    title: "Earn: стейкинг — пассивті табыс",
-    sub: "Simple Earn · ~2 мин",
-    desc: "Binance Earn бөлімінде активтерді пассив табысқа салуды үйренесіз.",
-    video: "Rf0RAs24HOA",
-    tip: "Flexible Earn-ді таңдаңыз — кез келген уақытта шығара аласыз. Locked жоғарырақ % береді, бірақ ақша тіркеледі.",
-    steps: ["Earn → Simple Earn бөліміне кіру", "APY (жылдық пайыз) дегенді түсіну", "Flexible vs Locked айырмашылығы", "USDT-ні депозитке салу"],
-    homework: "Simple Earn-ге кем дегенде 1 USDT салып, APY пайызын жазып, чатқа жібер ✅",
-    links: []
+  { n:6, title:"Earn — пассивті табыс", sub:"~2 мин", video:"Rf0RAs24HOA",
+    tip:"Flexible Earn-ді таңдаңыз — кез келген уақытта шығара аласыз.",
+    steps:["Earn → Simple Earn","APY дегенді түсіну","Flexible vs Locked","USDT депозитке салу"],
+    hw:"Simple Earn-ге 1 USDT салып, APY пайызын жазып, чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 7,
-    title: "Binance ID арқылы аударым",
-    sub: "Ішкі аударым · ~1 мин",
-    desc: "Комьюнити мүшелеріне жылдам және комиссиясыз аударымдар жасасыз.",
-    video: "cYYyTRs97Nc",
-    tip: "Binance ID арқылы аударым — ең жылдам және тегін жол. Желі комиссиясы жоқ!",
-    steps: ["Профиль → Binance ID-ді табу", "Wallet → Send → Binance ID таңдау", "Алушының ID-ін дұрыс енгізу", "Аударым растау"],
-    homework: "Комьюнити мүшесіне Binance ID арқылы 1 USDT жіберіп, транзакцияны скриншот түсір ✅",
-    links: []
+  { n:7, title:"Binance ID аударымы", sub:"~1 мин", video:"cYYyTRs97Nc",
+    tip:"Binance ID арқылы аударым — ең жылдам және тегін жол.",
+    steps:["Профиль → Binance ID табу","Wallet → Send → Binance ID","Алушы ID-ін енгізу","Аударым растау"],
+    hw:"Комьюнити мүшесіне Binance ID арқылы 1 USDT жіберіп, транзакцияны скриншот түсір ✅",
+    links:[]
   },
-  {
-    num: 8,
-    title: "Блокчейн желілері арқылы аударым",
-    sub: "BEP20, ERC20, TRX · ~1 мин",
-    desc: "BEP20, ERC20, TRX желілер арқылы қауіпсіз транзакциялар жасасыз.",
-    video: "YbPJdLeS3CM",
-    tip: "Желіні ҚАТЕ таңдасаңыз — ақшаңыз жоғалуы мүмкін! Жіберер алдында алушы биржасының желісін екі рет тексеріңіз.",
-    steps: ["Желілер айырмашылығын түсіну (BEP20 = арзан)", "Алушы биржасының желісін анықтау", "Аудару алдында екі рет тексеру", "Транзакцияны explorer-де тексеру"],
-    homework: "BEP20 желісімен аударым жасап, транзакция хэшін чатқа жібер ✅",
-    links: []
+  { n:8, title:"Блокчейн желілері аударым", sub:"~1 мин", video:"YbPJdLeS3CM",
+    tip:"Желіні ҚАТЕ таңдасаңыз ақшаңыз жоғалады! Екі рет тексеріңіз.",
+    steps:["Желілер айырмашылығы (BEP20=арзан)","Алушы желісін анықтау","Екі рет тексеру","Транзакцияны explorer-де тексеру"],
+    hw:"BEP20 желісімен аударым жасап, транзакция хэшін чатқа жібер ✅",
+    links:[]
   },
-  {
-    num: 9,
-    title: "Фьючерс: сделка ашу және жабу",
-    sub: "Futures · ~2 мин",
-    desc: "Binance Futures негізі. Лонг және шорт позицияларын үйренесіз.",
-    video: "nhvKFIBa8T4",
-    tip: "Фьючерс — тәжірибелілерге арналған. Алдымен споттан бастаңыз. Левередж ақшаны жылдам жоғалтуы мүмкін!",
-    steps: ["Futures бөліміне кіру", "Лонг және шорт позицияларын түсіну", "Левередж қалай жұмыс істейді", "Сделка ашу және қауіпсіз жабу"],
-    homework: "Фьючерсте demo режимінде 1 лонг позиция ашып, скриншот түсіріп, чатқа жібер ✅",
-    links: []
+  { n:9, title:"Фьючерс: сделка ашу/жабу", sub:"~2 мин", video:"nhvKFIBa8T4",
+    tip:"Фьючерс — тәжірибелілерге арналған. Алдымен споттан бастаңыз!",
+    steps:["Futures бөліміне кіру","Лонг және шорт түсіну","Левередж жұмысы","Сделка ашу және жабу"],
+    hw:"Demo режимінде 1 лонг позиция ашып, скриншот түсіріп, чатқа жібер ✅",
+    links:[]
   }
 ];
 
-const ACHIEVEMENTS = [
-  { icon: '🚀', title: 'Бірінші қадам', sub: '1-ші сабақты аяқтадың', req: 1 },
-  { icon: '⭐', title: 'Жарты жол', sub: '5 сабақты аяқтадың', req: 5 },
-  { icon: '🎓', title: 'Крипто Студент', sub: 'Барлық 9 сабақты аяқтадың', req: 9 },
+var ACHS = [
+  {icon:"🚀", title:"Бірінші қадам", sub:"1-ші сабақты аяқтадың", req:1},
+  {icon:"⭐", title:"Жарты жол", sub:"5 сабақты аяқтадың", req:5},
+  {icon:"🎓", title:"Крипто Студент", sub:"Барлық 9 сабақты аяқтадың", req:9}
 ];
 
-const STORAGE_KEY = 'crypto_aliphe_v4';
+// ── STATE ──
+var state = { done:[], streak:0, time:0, lastDate:null, paid:false };
+try {
+  var saved = localStorage.getItem('cryp_v5');
+  if (saved) state = JSON.parse(saved);
+} catch(e) {}
 
-function loadProgress() {
-  try {
-    const s = localStorage.getItem(STORAGE_KEY);
-    return s ? JSON.parse(s) : { completed: [], streak: 0, totalTime: 0, lastDate: null, paid: false };
-  } catch { return { completed: [], streak: 0, totalTime: 0, lastDate: null, paid: false }; }
+function save() {
+  try { localStorage.setItem('cryp_v5', JSON.stringify(state)); } catch(e) {}
 }
 
-function saveProgress(p) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch {}
-}
-
-let progress = { completed: [], streak: 0, totalTime: 0, lastDate: null, paid: false };
-try { progress = loadProgress(); } catch(e) { console.log("storage error", e); }
-
-function startApp() {
-  document.getElementById('screen-onboarding').style.display = 'none';
-  document.getElementById('screen-main').style.display = 'block';
-  renderLessons();
-  renderStats();
-}
-
-function renderLessons() {
-  const container = document.getElementById('tab-lessons');
-  container.innerHTML = '';
-  LESSONS.forEach((lesson, idx) => {
-    const isDone    = progress.completed.includes(lesson.num);
-    const isFree    = FREE_LESSONS.includes(lesson.num);
-    const isPaid    = progress.paid;
-    const isCurrent = !isDone && (idx === 0 || progress.completed.includes(LESSONS[idx - 1]?.num));
-    const isLocked  = !isDone && !isCurrent;
-    const isPaywall = isCurrent && !isFree && !isPaid;
-
-    const card = document.createElement('div');
-    card.className = 'lesson-card' + (isDone ? ' completed' : '') + (isLocked ? ' locked' : '');
-
-    const numClass   = isDone ? 'done' : isCurrent ? 'current' : 'locked';
-    const numContent = isDone ? '✓' : lesson.num;
-    let badgeClass, badgeText;
-    if (isDone)                   { badgeClass = 'badge-done';    badgeText = 'Дайын ✓'; }
-    else if (isFree && isCurrent) { badgeClass = 'badge-free';    badgeText = '🎁 Тегін'; }
-    else if (isPaywall)           { badgeClass = 'badge-locked';  badgeText = '🔒 Ақылы'; }
-    else if (isCurrent)           { badgeClass = 'badge-current'; badgeText = 'Жаңа'; }
-    else                          { badgeClass = 'badge-locked';  badgeText = '🔒'; }
-
-    card.innerHTML = `
-      <div class="lesson-header">
-        <div class="lesson-num ${numClass}">${numContent}</div>
-        <div class="lesson-info">
-          <div class="lesson-title">${lesson.title}</div>
-          <div class="lesson-sub">${lesson.sub}</div>
-        </div>
-        <span class="lesson-badge ${badgeClass}">${badgeText}</span>
-      </div>
-    `;
-    if (!isLocked) card.onclick = () => isPaywall ? openPaywall() : openDetail(lesson.num);
-    container.appendChild(card);
+// ── PAGES ──
+function show(id) {
+  var pages = ['page-onboarding','page-main','page-detail','page-paywall'];
+  pages.forEach(function(p) {
+    document.getElementById(p).style.display = (p === id) ? 'block' : 'none';
   });
-  updateProgressBar();
 }
 
-function updateProgressBar() {
-  const count = progress.completed.length;
-  const pct   = Math.round((count / 9) * 100);
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-text').textContent = count + ' / 9 сабақ';
-  const label = count === 0 ? 'Оқуды бастаңыз 👇' : count === 9 ? '🎓 Курс аяқталды!' : `${9 - count} сабақ қалды`;
-  document.getElementById('prog-label-text').textContent = label;
+// ── INIT ──
+document.getElementById('btn-start').onclick = function() {
+  show('page-main');
+  renderList();
+  renderStats();
+};
+
+document.getElementById('btn-back-detail').onclick = function() {
+  show('page-main');
+  renderList();
+};
+
+document.getElementById('btn-back-paywall').onclick = function() {
+  show('page-main');
+};
+
+// ── TABS ──
+function switchTab(tab) {
+  document.getElementById('tab-lessons').style.display = tab === 'lessons' ? 'block' : 'none';
+  document.getElementById('tab-stats').style.display   = tab === 'stats'   ? 'block' : 'none';
+  document.getElementById('tab-btn-lessons').className = tab === 'lessons' ? 'tab active' : 'tab';
+  document.getElementById('tab-btn-stats').className   = tab === 'stats'   ? 'tab active' : 'tab';
 }
 
-function openDetail(num) {
-  const lesson = LESSONS.find(l => l.num === num);
-  const isDone  = progress.completed.includes(num);
+// ── LESSON LIST ──
+function renderList() {
+  var el = document.getElementById('tab-lessons');
+  el.innerHTML = '';
 
-  document.getElementById('detail-heading').textContent = num + '-сабақ';
+  LESSONS.forEach(function(L, idx) {
+    var isDone    = state.done.indexOf(L.n) > -1;
+    var isFree    = FREE.indexOf(L.n) > -1;
+    var prevDone  = idx === 0 || state.done.indexOf(LESSONS[idx-1].n) > -1;
+    var isCurrent = !isDone && prevDone;
+    var isLocked  = !isDone && !isCurrent;
+    var isPW      = isCurrent && !isFree && !state.paid;
 
-  const linksHTML = lesson.links && lesson.links.length > 0
-    ? `<div class="links-section">
-        <div class="steps-label">Пайдалы сілтемелер</div>
-        ${lesson.links.map(l => `<a class="ref-link" href="${l.url}" target="_blank">${l.label}</a>`).join('')}
-      </div>` : '';
+    var numCls = isDone ? 'lnum done' : isCurrent ? 'lnum cur' : 'lnum lock';
+    var numTxt = isDone ? '✓' : String(L.n);
+    var badgeCls, badgeTxt;
+    if (isDone)              { badgeCls = 'badge bdone';  badgeTxt = 'Дайын ✓'; }
+    else if (isFree&&isCurrent){ badgeCls = 'badge bfree'; badgeTxt = '🎁 Тегін'; }
+    else if (isPW)           { badgeCls = 'badge block';  badgeTxt = '🔒 Ақылы'; }
+    else if (isCurrent)      { badgeCls = 'badge bcur';   badgeTxt = 'Жаңа'; }
+    else                     { badgeCls = 'badge block';  badgeTxt = '🔒'; }
 
-  document.getElementById('detail-body').innerHTML = `
-    <div class="detail-num-badge">${num}-сабақ</div>
-    <div class="detail-lesson-title">${lesson.title}</div>
-    <div class="detail-desc">${lesson.desc}</div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/${lesson.video}?playsinline=1&rel=0&modestbranding=1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
-    <div class="assila-tip">
-      <div class="assila-tip-label">👩‍💼 Ассиладан кеңес</div>
-      <div class="assila-tip-text">${lesson.tip}</div>
-    </div>
-    <div class="steps-label">Сабақ жоспары</div>
-    ${lesson.steps.map(s => `
-      <div class="step-item">
-        <div class="step-dot">✓</div>
-        <div class="step-text">${s}</div>
-      </div>`).join('')}
-    ${linksHTML}
-    <div class="homework-box">
-      <div class="homework-label">📝 Үй жұмысы</div>
-      <div class="homework-text">${lesson.homework}</div>
-      <a class="homework-btn" href="${COMMUNITY_LINK}" target="_blank">
-        📤 Чатқа жіберу
-      </a>
-    </div>
-    ${isDone
-      ? `<button class="done-btn">✓ Сабақ аяқталды</button>`
-      : `<button class="start-btn" onclick="markDone(${num})">Сабақты аяқтадым ✓</button>`
+    var card = document.createElement('div');
+    card.className = 'lcard' + (isDone?' done':'') + (isLocked?' locked':'');
+    card.innerHTML =
+      '<div class="lrow">' +
+        '<div class="' + numCls + '">' + numTxt + '</div>' +
+        '<div class="linfo"><div class="ltitle">' + L.title + '</div><div class="lsub">' + L.sub + '</div></div>' +
+        '<span class="' + badgeCls + '">' + badgeTxt + '</span>' +
+      '</div>';
+
+    if (!isLocked) {
+      (function(lesson, paywall) {
+        card.onclick = function() {
+          if (paywall) { show('page-paywall'); }
+          else { openLesson(lesson.n); }
+        };
+      })(L, isPW);
     }
-    <a class="community-btn" href="${COMMUNITY_LINK}" target="_blank">
-      💬 Сұрақ қою — Комьюнити чат
-    </a>
-  `;
-  document.getElementById('detail-view').classList.add('open');
-  document.getElementById('detail-view').scrollTop = 0;
+
+    el.appendChild(card);
+  });
+
+  // Progress
+  var count = state.done.length;
+  document.getElementById('prog-fill').style.width = Math.round(count/9*100) + '%';
+  document.getElementById('prog-right').textContent = count + ' / 9';
+  document.getElementById('prog-left').textContent =
+    count === 0 ? 'Оқуды бастаңыз 👇' :
+    count === 9 ? '🎓 Курс аяқталды!' :
+    (9 - count) + ' сабақ қалды';
 }
 
-function closeDetail() {
-  document.getElementById('detail-view').classList.remove('open');
-}
+// ── LESSON DETAIL ──
+function openLesson(num) {
+  var L = null;
+  for (var i=0; i<LESSONS.length; i++) { if (LESSONS[i].n === num) { L = LESSONS[i]; break; } }
+  if (!L) return;
 
-function openPaywall() {
-  document.getElementById('paywall-view').classList.add('open');
-}
+  var isDone = state.done.indexOf(num) > -1;
 
-function closePaywall() {
-  document.getElementById('paywall-view').classList.remove('open');
+  var linksHtml = '';
+  if (L.links && L.links.length > 0) {
+    linksHtml = '<div class="section-label">Пайдалы сілтемелер</div>';
+    L.links.forEach(function(lk) {
+      linksHtml += '<a class="ref-btn" href="' + lk.u + '" target="_blank">' + lk.t + '</a>';
+    });
+  }
+
+  var stepsHtml = '';
+  L.steps.forEach(function(s) {
+    stepsHtml += '<div class="step"><div class="sdot">✓</div><div class="stxt">' + s + '</div></div>';
+  });
+
+  var actionBtn = isDone
+    ? '<button class="btn-done">✓ Сабақ аяқталды</button>'
+    : '<button class="btn-complete" onclick="markDone(' + num + ')">Сабақты аяқтадым ✓</button>';
+
+  document.getElementById('detail-content').innerHTML =
+    '<div class="d-badge">' + num + '-сабақ</div>' +
+    '<div class="d-title">' + L.title + '</div>' +
+    '<div class="video-wrap"><iframe src="https://www.youtube.com/embed/' + L.video + '?playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' +
+    '<div class="tip-box"><div class="tip-label">👩‍💼 Ассиладан кеңес</div><div class="tip-txt">' + L.tip + '</div></div>' +
+    '<div class="section-label">Сабақ жоспары</div>' +
+    stepsHtml +
+    linksHtml +
+    '<div class="hw-box"><div class="hw-label">📝 Үй жұмысы</div><div class="hw-txt">' + L.hw + '</div><a class="hw-btn" href="' + CHAT + '" target="_blank">📤 Чатқа жіберу</a></div>' +
+    actionBtn +
+    '<a class="chat-btn" href="' + CHAT + '" target="_blank">💬 Сұрақ қою — Комьюнити чат</a>';
+
+  show('page-detail');
+  document.getElementById('page-detail').scrollTop = 0;
 }
 
 function markDone(num) {
-  if (progress.completed.includes(num)) return;
-  progress.completed.push(num);
-  const lesson = LESSONS.find(l => l.num === num);
-  const mins = parseInt(lesson.sub.match(/~(\d+)/)?.[1] || '2');
-  progress.totalTime += mins;
-  const today = new Date().toDateString();
-  if (progress.lastDate !== today) {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    progress.streak = progress.lastDate === yesterday.toDateString() ? progress.streak + 1 : 1;
-    progress.lastDate = today;
+  if (state.done.indexOf(num) > -1) return;
+  state.done.push(num);
+  var L = null;
+  for (var i=0; i<LESSONS.length; i++) { if (LESSONS[i].n === num) { L = LESSONS[i]; break; } }
+  if (L) state.time += parseInt(L.sub) || 2;
+  var today = new Date().toDateString();
+  if (state.lastDate !== today) {
+    var yest = new Date(); yest.setDate(yest.getDate()-1);
+    state.streak = (state.lastDate === yest.toDateString()) ? state.streak+1 : 1;
+    state.lastDate = today;
   }
-  saveProgress(progress);
-  renderLessons();
+  save();
   renderStats();
-  openDetail(num);
+  openLesson(num);
 }
 
+// ── STATS ──
 function renderStats() {
-  document.getElementById('s-done').textContent   = progress.completed.length;
-  document.getElementById('s-streak').textContent = progress.streak;
-  document.getElementById('s-time').textContent   = progress.totalTime;
-  const unlocked = ACHIEVEMENTS.filter(a => progress.completed.length >= a.req);
+  document.getElementById('s-done').textContent   = state.done.length;
+  document.getElementById('s-streak').textContent = state.streak;
+  document.getElementById('s-time').textContent   = state.time;
+  var unlocked = ACHS.filter(function(a) { return state.done.length >= a.req; });
   document.getElementById('s-ach').textContent = unlocked.length;
-  const achList = document.getElementById('achievements-list');
-  achList.innerHTML = unlocked.length === 0
+  var html = unlocked.length === 0
     ? '<p style="text-align:center;color:#8a9bb0;font-size:13px;margin-top:16px">Сабақтарды аяқтап жетістіктер жина! 🌟</p>'
-    : unlocked.map(a => `
-        <div class="achievement">
-          <div class="ach-icon">${a.icon}</div>
-          <div><div class="ach-title">${a.title}</div><div class="ach-sub">${a.sub}</div></div>
-        </div>`).join('');
-}
-
-function showTab(tab) {
-  document.querySelectorAll('.tab').forEach((t, i) => {
-    t.classList.toggle('active', (tab==='lessons'&&i===0)||(tab==='stats'&&i===1));
+    : '';
+  unlocked.forEach(function(a) {
+    html += '<div class="ach"><div class="ach-icon">' + a.icon + '</div><div><div class="ach-title">' + a.title + '</div><div class="ach-sub">' + a.sub + '</div></div></div>';
   });
-  document.getElementById('tab-lessons').style.display = tab==='lessons' ? 'block' : 'none';
-  document.getElementById('tab-stats').style.display   = tab==='stats'   ? 'block' : 'none';
+  document.getElementById('ach-list').innerHTML = html;
 }
