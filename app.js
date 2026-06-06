@@ -8,7 +8,7 @@ try {
 
 // ── DATA ──
 var FREE = [1, 2];
-var CHAT = "https://t.me/c/3633850155/1";
+var CHAT = "https://t.me/assila_crypto_top";
 
 var LESSONS = [
   { n:1, title:"Binance-ға тіркелу", sub:"~1 мин", video:"q-5et-862Bg",
@@ -100,6 +100,11 @@ document.getElementById('btn-start').onclick = function() {
 };
 
 document.getElementById('btn-back-detail').onclick = function() {
+  show('page-main');
+  renderList();
+};
+
+document.getElementById('btn-back-detail2').onclick = function() {
   show('page-main');
   renderList();
 };
