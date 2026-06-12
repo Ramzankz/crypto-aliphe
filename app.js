@@ -86,7 +86,7 @@ function save() {
 
 // ── PAGES ──
 function show(id) {
-  var pages = ['page-onboarding','page-main','page-detail','page-paywall'];
+  var pages = ['page-onboarding','page-lead','page-main','page-detail','page-paywall'];
   pages.forEach(function(p) {
     document.getElementById(p).style.display = (p === id) ? 'block' : 'none';
   });
@@ -94,6 +94,42 @@ function show(id) {
 
 // ── INIT ──
 document.getElementById('btn-start').onclick = function() {
+  // Telegram-нан атын алу әрекеті
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+      var u = window.Telegram.WebApp.initDataUnsafe.user;
+      if (u.first_name) document.getElementById('lead-name').value = u.first_name + (u.last_name ? ' ' + u.last_name : '');
+      if (u.username) document.getElementById('lead-username').value = '@' + u.username;
+    }
+  } catch(e) {}
+  show('page-lead');
+};
+
+document.getElementById('btn-lead-submit').onclick = function() {
+  var name = document.getElementById('lead-name').value.trim();
+  var username = document.getElementById('lead-username').value.trim();
+
+  if (!name) {
+    document.getElementById('lead-name').style.borderColor = '#f59e0b';
+    document.getElementById('lead-name').focus();
+    return;
+  }
+
+  state.leadName = name;
+  state.leadUsername = username;
+  save();
+
+  // Ассилаға lead хабары жіберу үшін сілтеме ашу
+  var msg = "🎓 Жаңа оқушы қосылды!\n\n👤 Аты: " + name + "\n📱 Telegram: " + (username || "көрсетілмеген");
+  var url = "https://t.me/klient_pro?text=" + encodeURIComponent(msg);
+  try { window.open(url, '_blank'); } catch(e) {}
+
+  show('page-main');
+  renderList();
+  renderStats();
+};
+
+document.getElementById('btn-lead-skip').onclick = function() {
   show('page-main');
   renderList();
   renderStats();

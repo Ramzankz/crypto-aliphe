@@ -128,3 +128,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   cursor: pointer;
 }
 .floating-back-btn:active { background: #2a2a3e; }
+
+/* LEAD FORM */
+.lead-form { width: 100%; margin-bottom: 20px; text-align: left; }
+.lead-label {
+  display: block; font-size: 13px; color: #a0c4d0;
+  margin-bottom: 6px; margin-top: 14px; font-weight: 500;
+}
+.lead-label:first-child { margin-top: 0; }
+.lead-input {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px; color: #fff; font-size: 15px;
+  outline: none; transition: border-color 0.2s;
+}
+.lead-input::placeholder { color: #5a7a8a; }
+.lead-input:focus { border-color: #1D9E75; }
+.lead-skip {
+  font-size: 13px; color: #5a7a8a; cursor: pointer;
+  text-decoration: underline; margin-top: -8px;
+}
