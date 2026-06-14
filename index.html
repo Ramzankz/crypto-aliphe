@@ -5,55 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Крипто Әліппе</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<!-- ONBOARDING -->
 <div id="page-onboarding">
+  <div class="ob-bg">
+    <div class="ob-circle c1"></div>
+    <div class="ob-circle c2"></div>
+    <div class="ob-circle c3"></div>
+  </div>
   <div class="ob-wrap">
-    <div class="ob-glow"></div>
-    <div class="ob-logo">₿</div>
+    <div class="ob-badge"><i class="fa-brands fa-telegram"></i> @assila.crypto · 12K оқырман</div>
+    <div class="ob-logo"><i class="fa-brands fa-bitcoin"></i></div>
     <div class="ob-brand">Крипто Әліппе</div>
     <div class="ob-sub">9 күнде криптоны түсін</div>
     <div class="ob-desc">Binance-тан фьючерске дейін —<br>қазақша, түсінікті, қауіпсіз</div>
     <div class="ob-feats">
-      <div class="ob-feat">🎯 Нөлден бастайсың</div>
-      <div class="ob-feat">🛡️ Ақшаңды жоғалтпайсың</div>
-      <div class="ob-feat">🇰🇿 Қазақша түсіндіреміз</div>
+      <div class="ob-feat glass"><i class="fa-solid fa-bullseye"></i><span>Нөлден бастайсың</span></div>
+      <div class="ob-feat glass"><i class="fa-solid fa-shield-halved"></i><span>Ақшаңды жоғалтпайсың</span></div>
+      <div class="ob-feat glass"><i class="fa-solid fa-graduation-cap"></i><span>Қазақша түсіндіреміз</span></div>
     </div>
-    <div class="ob-free">🎁 1-2 сабақ тегін</div>
-    <button id="btn-start" class="ob-btn">Оқуды бастау →</button>
+    <div class="ob-free"><i class="fa-solid fa-gift"></i> 1-2 сабақ тегін</div>
+    <button id="btn-start" class="ob-btn pulse">Оқуды бастау <i class="fa-solid fa-arrow-right"></i></button>
     <div class="ob-stats">
-      <div class="ob-stat"><b>9</b><span>сабақ</span></div>
-      <div class="ob-divider"></div>
-      <div class="ob-stat"><b>7+</b><span>жыл тәжірибе</span></div>
-      <div class="ob-divider"></div>
-      <div class="ob-stat"><b>350K</b><span>толық курс</span></div>
+      <div class="ob-stat glass-mini"><div class="ob-stat-num">9</div><div class="ob-stat-label">сабақ</div></div>
+      <div class="ob-stat glass-mini"><div class="ob-stat-num">7+</div><div class="ob-stat-label">жыл тәжірибе</div></div>
+      <div class="ob-stat glass-mini"><div class="ob-stat-num">350K</div><div class="ob-stat-label">толық курс</div></div>
     </div>
   </div>
 </div>
 
+<!-- LEAD FORM -->
 <div id="page-lead" style="display:none">
+  <div class="ob-bg">
+    <div class="ob-circle c1"></div>
+    <div class="ob-circle c2"></div>
+  </div>
   <div class="ob-wrap">
-    <div class="ob-glow"></div>
-    <div class="ob-logo">👋</div>
+    <div class="ob-logo small"><i class="fa-solid fa-hand-wave"></i></div>
     <div class="ob-brand">Танысып алайық!</div>
-    <div class="ob-desc">Сабақтарды бастамас бұрын аз ғана ақпарат қалдырыңыз — нәтижеңізді бақылап, дұрыс кеңес бере аламын 💚</div>
+    <div class="ob-desc">Аз ғана ақпарат қалдырыңыз — нәтижеңізді бақылап, дұрыс кеңес бере аламын 💚</div>
     <div class="lead-form">
-      <label class="lead-label">Атыңыз</label>
+      <label class="lead-label"><i class="fa-solid fa-user"></i> Атыңыз</label>
       <input type="text" id="lead-name" class="lead-input" placeholder="Мысалы: Айгерім" />
-      <label class="lead-label">Telegram username</label>
+      <label class="lead-label"><i class="fa-brands fa-telegram"></i> Telegram username</label>
       <input type="text" id="lead-username" class="lead-input" placeholder="@username" />
     </div>
-    <button id="btn-lead-submit" class="ob-btn">Жалғастыру →</button>
-    <div class="lead-skip" id="btn-lead-skip">Кейінірек толтырамын</div>
+    <button id="btn-lead-submit" class="ob-btn">Жалғастыру <i class="fa-solid fa-arrow-right"></i></button>
+    <div class="lead-skip" id="btn-lead-skip"><i class="fa-solid fa-forward"></i> Кейінірек толтырамын</div>
   </div>
 </div>
 
+<!-- MAIN APP -->
 <div id="page-main" style="display:none">
   <div class="header">
     <div class="header-top">
-      <div class="logo">₿</div>
+      <div class="logo"><i class="fa-brands fa-bitcoin"></i></div>
       <div>
         <div class="brand">Крипто Әліппе</div>
         <div class="tagline">@assila.crypto</div>
@@ -67,54 +77,116 @@
   </div>
 
   <div class="tabs">
-    <div class="tab active" id="tab-btn-lessons" onclick="switchTab('lessons')">📚 Сабақтар</div>
-    <div class="tab" id="tab-btn-stats" onclick="switchTab('stats')">📊 Нәтиже</div>
+    <div class="tab active" id="tab-btn-lessons" onclick="switchTab('lessons')"><i class="fa-solid fa-book-open"></i> Сабақтар</div>
+    <div class="tab" id="tab-btn-author" onclick="switchTab('author')"><i class="fa-solid fa-user-tie"></i> Автор</div>
+    <div class="tab" id="tab-btn-reviews" onclick="switchTab('reviews')"><i class="fa-solid fa-star"></i> Пікірлер</div>
+    <div class="tab" id="tab-btn-stats" onclick="switchTab('stats')"><i class="fa-solid fa-chart-bar"></i> Нәтиже</div>
   </div>
 
+  <!-- LESSONS TAB -->
   <div id="tab-lessons" class="list"></div>
 
+  <!-- AUTHOR TAB -->
+  <div id="tab-author" style="display:none; padding:16px">
+    <div class="author-card glass-card">
+      <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+      <div class="author-name">Ассила</div>
+      <div class="author-title">Крипто эксперт · @assila.crypto</div>
+      <div class="author-bio">7+ жыл крипто саласындағы тәжірибе. Binance, DeFi, трейдинг — барлығын қазақша, түсінікті тілмен үйретемін. 12,000+ оқырманым бар.</div>
+      <div class="author-stats">
+        <div class="author-stat"><div class="ast-num">7+</div><div class="ast-label">жыл тәжірибе</div></div>
+        <div class="author-stat"><div class="ast-num">12K</div><div class="ast-label">оқырман</div></div>
+        <div class="author-stat"><div class="ast-num">500+</div><div class="ast-label">оқушы</div></div>
+      </div>
+    </div>
+    <div class="author-achievements">
+      <div class="ach-item glass-card"><i class="fa-solid fa-trophy"></i><div><div class="ach-t">Binance KZ серіктес</div><div class="ach-s">Ресми реферал партнер</div></div></div>
+      <div class="ach-item glass-card"><i class="fa-solid fa-graduation-cap"></i><div><div class="ach-t">Крипто білім беруші</div><div class="ach-s">Қазақша курстар жасаушы</div></div></div>
+      <div class="ach-item glass-card"><i class="fa-solid fa-chart-line"></i><div><div class="ach-t">DeFi маманы</div><div class="ach-s">AAVE, Staking, Grid Bot</div></div></div>
+    </div>
+    <a href="https://t.me/asilekcrypto" target="_blank" class="author-follow-btn"><i class="fa-brands fa-telegram"></i> Telegram каналға жазылу</a>
+    <a href="https://www.instagram.com/assila.crypto" target="_blank" class="author-insta-btn"><i class="fa-brands fa-instagram"></i> Instagram-да қарау</a>
+  </div>
+
+  <!-- REVIEWS TAB -->
+  <div id="tab-reviews" style="display:none; padding:16px">
+    <div class="reviews-header">
+      <div class="reviews-score">4.9</div>
+      <div><div class="reviews-stars">★★★★★</div><div class="reviews-count">8 оқушы пікірі</div></div>
+    </div>
+    <div id="reviews-list">
+      <div class="review-card glass-card">
+        <div class="rv-top"><div class="rv-avatar">А</div><div><div class="rv-name">Айгерім С.</div><div class="rv-stars">★★★★★</div></div></div>
+        <div class="rv-text">"Крипто дегенді жалпы білмейтінмін, бірақ осы курстан кейін Binance-та өзім сауда жасап жатырмын!"</div>
+        <div class="rv-date">Мамыр 2026</div>
+      </div>
+      <div class="review-card glass-card">
+        <div class="rv-top"><div class="rv-avatar">М</div><div><div class="rv-name">Мейрам Қ.</div><div class="rv-stars">★★★★★</div></div></div>
+        <div class="rv-text">"Ассила өте түсінікті түрде түсіндіреді. Тегін сабақтардан кейін толық курсты алдым — өкінбедім!"</div>
+        <div class="rv-date">Мамыр 2026</div>
+      </div>
+      <div class="review-card glass-card">
+        <div class="rv-top"><div class="rv-avatar">З</div><div><div class="rv-name">Зарина Б.</div><div class="rv-stars">★★★★★</div></div></div>
+        <div class="rv-text">"P2P арқылы теңгені USDT-ге айырбастауды үйрендім. Енді Freedom Bank арқылы оңай жасаймын."</div>
+        <div class="rv-date">Сәуір 2026</div>
+      </div>
+      <div class="review-card glass-card">
+        <div class="rv-top"><div class="rv-avatar">Д</div><div><div class="rv-name">Дінмұхамед А.</div><div class="rv-stars">★★★★★</div></div></div>
+        <div class="rv-text">"Zoom эфирде тікелей сұрақ қоя алдым. Жеке кеңес беру деңгейі — 10/10!"</div>
+        <div class="rv-date">Сәуір 2026</div>
+      </div>
+    </div>
+    <div class="reviews-cta">
+      <div class="rcta-title">Курсты алып, пікіріңді қалдыр!</div>
+      <a href="https://t.me/klient_pro?text=Крипто Әліппе курсын алғым келеді!" target="_blank" class="ob-btn" style="margin:0"><i class="fa-solid fa-rocket"></i> Курсты алу — 350 000 ₸</a>
+    </div>
+  </div>
+
+  <!-- STATS TAB -->
   <div id="tab-stats" style="display:none; padding:12px">
     <div class="stat-grid">
-      <div class="stat-card"><div class="si">✅</div><div class="sn" id="s-done">0</div><div class="sl">Аяқталған</div></div>
-      <div class="stat-card"><div class="si">🔥</div><div class="sn" id="s-streak">0</div><div class="sl">Серия</div></div>
-      <div class="stat-card"><div class="si">⏱️</div><div class="sn" id="s-time">0</div><div class="sl">Минут</div></div>
-      <div class="stat-card"><div class="si">🏆</div><div class="sn" id="s-ach">0</div><div class="sl">Жетістік</div></div>
+      <div class="stat-card glass-card"><div class="si"><i class="fa-solid fa-check-circle"></i></div><div class="sn" id="s-done">0</div><div class="sl">Аяқталған</div></div>
+      <div class="stat-card glass-card"><div class="si"><i class="fa-solid fa-fire"></i></div><div class="sn" id="s-streak">0</div><div class="sl">Серия</div></div>
+      <div class="stat-card glass-card"><div class="si"><i class="fa-solid fa-clock"></i></div><div class="sn" id="s-time">0</div><div class="sl">Минут</div></div>
+      <div class="stat-card glass-card"><div class="si"><i class="fa-solid fa-trophy"></i></div><div class="sn" id="s-ach">0</div><div class="sl">Жетістік</div></div>
     </div>
     <div id="ach-list"></div>
   </div>
 </div>
 
+<!-- DETAIL PAGE -->
 <div id="page-detail" style="display:none">
   <div class="top-bar">
-    <button class="back-btn" id="btn-back-detail">← Сабақтарға оралу</button>
+    <button class="back-btn" id="btn-back-detail"><i class="fa-solid fa-arrow-left"></i> Сабақтарға оралу</button>
   </div>
   <div id="detail-content" style="padding:16px;padding-bottom:80px"></div>
   <div class="floating-back">
-    <button class="floating-back-btn" id="btn-back-detail2">← Сабақтар тізіміне оралу</button>
+    <button class="floating-back-btn" id="btn-back-detail2"><i class="fa-solid fa-arrow-left"></i> Сабақтар тізіміне оралу</button>
   </div>
 </div>
 
+<!-- PAYWALL PAGE -->
 <div id="page-paywall" style="display:none">
   <div class="top-bar">
-    <button class="back-btn" id="btn-back-paywall">← Артқа</button>
+    <button class="back-btn" id="btn-back-paywall"><i class="fa-solid fa-arrow-left"></i> Артқа</button>
   </div>
   <div class="pw-body">
-    <div class="pw-icon">🔐</div>
+    <div class="pw-lock"><i class="fa-solid fa-lock"></i></div>
     <div class="pw-title">Толық курсты ашу</div>
     <div class="pw-desc">2 тегін сабақ өттіңіз.<br>Қалған 7 сабақты ашу үшін курсты сатып алыңыз.</div>
     <div class="pw-price">350 000 ₸</div>
-    <div class="pw-list">
-      <div class="pw-item">✅ 9 видео сабақ</div>
-      <div class="pw-item">✅ Ассиламен жеке байланыс</div>
-      <div class="pw-item">✅ Комьюнитиге кіру</div>
-      <div class="pw-item">✅ Zoom эфирлер</div>
+    <div class="pw-list glass-card">
+      <div class="pw-item"><i class="fa-solid fa-video"></i> 9 видео сабақ</div>
+      <div class="pw-item"><i class="fa-solid fa-comments"></i> Ассиламен жеке байланыс</div>
+      <div class="pw-item"><i class="fa-solid fa-users"></i> Комьюнитиге кіру</div>
+      <div class="pw-item"><i class="fa-solid fa-video-camera"></i> Zoom эфирлер</div>
     </div>
-    <div class="kaspi-box">
-      <div class="kaspi-title">💳 Kaspi QR арқылы төлеу</div>
+    <div class="kaspi-box glass-card">
+      <div class="kaspi-title"><i class="fa-solid fa-qrcode"></i> Kaspi QR арқылы төлеу</div>
       <div class="kaspi-hint">Kaspi app → Сканировать → QR кодты скан ет</div>
       <img src="kaspi-qr.jpg" class="kaspi-img" alt="Kaspi QR" />
     </div>
-    <a href="https://t.me/klient_pro?text=%F0%9F%92%B3%20%D0%A2%D3%A9%D0%BB%D0%B5%D0%BC%20%D0%B6%D0%B0%D1%81%D0%B0%D0%B4%D1%8B%D0%BC!%0A%0A%F0%9F%91%A4%20%D0%90%D1%82%D1%8B%D0%BC:%20%5B%D0%90%D1%82%D1%8B%D2%A3%D1%8B%D0%B7%D0%B4%D1%8B%20%D0%B6%D0%B0%D0%B7%D1%8B%D2%A3%D1%8B%D0%B7%5D%0A%F0%9F%93%B1%20%D0%A2%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD:%20%5B%D0%BD%D3%A9%D0%BC%D1%96%D1%80%D1%96%D2%A3%D1%96%D0%B7%5D%0A%F0%9F%92%B0%20%D0%A1%D0%BE%D0%BC%D0%B0:%20350%20000%20%E2%82%B8%0A%0A%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%20%D3%98%D0%BB%D1%96%D0%BF%D0%BF%D0%B5%20%D0%BA%D1%83%D1%80%D1%81%D1%8B%D0%BD%D0%B0%20%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%20%D0%B0%D1%88%D1%8B%D2%A3%D1%8B%D0%B7%D0%B4%D1%8B%20%D3%A9%D1%82%D1%96%D0%BD%D0%B5%D0%BC%D1%96%D0%BD" target="_blank" class="pw-btn">✉️ Төлем жасадым — Ассилаға жаз</a>
+    <a href="https://t.me/klient_pro?text=%F0%9F%92%B3%20%D0%A2%D3%A9%D0%BB%D0%B5%D0%BC%20%D0%B6%D0%B0%D1%81%D0%B0%D0%B4%D1%8B%D0%BC!%0A%0A%F0%9F%91%A4%20%D0%90%D1%82%D1%8B%D0%BC:%20%5B%D0%90%D1%82%D1%8B%D2%A3%D1%8B%D0%B7%D0%B4%D1%8B%20%D0%B6%D0%B0%D0%B7%D1%8B%D2%A3%D1%8B%D0%B7%5D%0A%F0%9F%93%B1%20%D0%A2%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD:%20%5B%D0%BD%D3%A9%D0%BC%D1%96%D1%80%D1%96%D2%A3%D1%96%D0%B7%5D%0A%F0%9F%92%B0%20%D0%A1%D0%BE%D0%BC%D0%B0:%20350%20000%20%E2%82%B8%0A%0A%D0%9A%D1%80%D0%B8%D0%BF%D1%82%D0%BE%20%D3%98%D0%BB%D1%96%D0%BF%D0%BF%D0%B5%20%D0%BA%D1%83%D1%80%D1%81%D1%8B%D0%BD%D0%B0%20%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%20%D0%B0%D1%88%D1%8B%D2%A3%D1%8B%D0%B7%D0%B4%D1%8B%20%D3%A9%D1%82%D1%96%D0%BD%D0%B5%D0%BC%D1%96%D0%BD" target="_blank" class="pw-btn"><i class="fa-solid fa-paper-plane"></i> Төлем жасадым — Ассилаға жаз</a>
     <div class="pw-note">Хабар жібергеннен кейін Ассила доступ ашады · @klient_pro</div>
   </div>
 </div>

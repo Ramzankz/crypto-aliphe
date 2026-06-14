@@ -235,6 +235,13 @@ function openLesson(num) {
     ? '<button class="btn-done">✓ Сабақ аяқталды</button>'
     : '<button class="btn-complete" onclick="markDone(' + num + ')">Сабақты аяқтадым ✓</button>';
 
+  var ctaHtml = '';
+  if (!state.paid && !FREE.includes(num)) {
+    ctaHtml = '';
+  } else if (!state.paid && isDone) {
+    ctaHtml = '<div class="cta-box"><div class="cta-title">🚀 Толық курсты аш!</div><div class="cta-desc">Барлық 9 сабақ + жеке байланыс + Zoom эфирлер</div><a class="cta-btn" href="#" onclick="document.getElementById(\'btn-back-detail\').click();setTimeout(function(){show(\'page-paywall\')},100);return false;">Курсты сатып алу — 350 000 ₸</a></div>';
+  }
+
   document.getElementById('detail-content').innerHTML =
     '<div class="d-badge">' + num + '-сабақ</div>' +
     '<div class="d-title">' + L.title + '</div>' +
@@ -245,6 +252,7 @@ function openLesson(num) {
     linksHtml +
     '<div class="hw-box"><div class="hw-label">📝 Үй жұмысы</div><div class="hw-txt">' + L.hw + '</div><a class="hw-btn" href="' + CHAT + '" target="_blank">📤 Чатқа жіберу</a></div>' +
     actionBtn +
+    ctaHtml +
     '<a class="chat-btn" href="' + CHAT + '" target="_blank">💬 Сұрақ қою — Комьюнити чат</a>';
 
   show('page-detail');
