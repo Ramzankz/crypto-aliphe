@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Инвестиция Калькуляторы</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; min-height: 100vh; padding: 16px; }
+
+    .header { background: linear-gradient(135deg, #0a1628, #0f2d1e); border-radius: 16px; padding: 20px; margin-bottom: 16px; text-align: center; }
+    .header h1 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .header p { font-size: 13px; color: #5DCAA5; }
+
+    .card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .card-title { font-size: 13px; font-weight: 700; color: #8a9bb0; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; color: #5a6a7e; margin-bottom: 6px; font-weight: 500; }
+    .field input { width: 100%; padding: 13px 16px; border: 1.5px solid #e8ecf0; border-radius: 12px; font-size: 16px; color: #1a1a2e; outline: none; transition: border-color .2s; background: #f8fafc; }
+    .field input:focus { border-color: #1D9E75; background: #fff; }
+    .field .unit { position: relative; }
+    .field .unit input { padding-right: 48px; }
+    .field .unit span { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #8a9bb0; font-weight: 600; }
+
+    .periods { display: flex; gap: 8px; flex-wrap: wrap; }
+    .period-btn { flex: 1; min-width: 60px; padding: 10px 6px; background: #f0f4f8; border: 1.5px solid #e8ecf0; border-radius: 10px; font-size: 13px; font-weight: 600; color: #5a6a7e; cursor: pointer; text-align: center; transition: all .2s; }
+    .period-btn.active { background: #1D9E75; border-color: #1D9E75; color: #fff; }
+
+    .calc-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #1D9E75, #5DCAA5); color: #fff; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 4px; box-shadow: 0 6px 20px rgba(29,158,117,.3); transition: all .2s; }
+    .calc-btn:active { transform: scale(.97); }
+
+    .result { display: none; }
+    .result.show { display: block; }
+    .result-main { background: linear-gradient(135deg, #0a1628, #0f2d1e); border-radius: 16px; padding: 24px; margin-bottom: 12px; text-align: center; }
+    .result-label { font-size: 13px; color: #5DCAA5; margin-bottom: 8px; }
+    .result-amount { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .result-sub { font-size: 13px; color: #7a9ab0; }
+
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .result-card { background: #fff; border-radius: 14px; padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .result-card .rc-label { font-size: 11px; color: #8a9bb0; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+    .result-card .rc-value { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .result-card .rc-value.green { color: #1D9E75; }
+
+    .table-card { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .table-title { font-size: 13px; font-weight: 700; color: #8a9bb0; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 11px; color: #8a9bb0; text-align: left; padding: 6px 8px; border-bottom: 1.5px solid #f0f4f8; }
+    td { font-size: 13px; color: #1a1a2e; padding: 10px 8px; border-bottom: 1px solid #f8fafc; }
+    td.green { color: #1D9E75; font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+
+    .note { font-size: 12px; color: #8a9bb0; text-align: center; margin-top: 12px; line-height: 1.5; }
+
+    .back-link { display: block; text-align: center; padding: 14px; background: #1a1a2e; color: #fff; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🧮 Инвестиция Калькуляторы</h1>
+  <p>Крипто Әліппе · @assila.crypto</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Деректерді енгізіңіз</div>
+
+  <div class="field">
+    <label>Депозит сомасы (₸)</label>
+    <div class="unit">
+      <input type="number" id="amount" placeholder="500 000" min="0" />
+      <span>₸</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Жылдық пайыз (%)</label>
+    <div class="unit">
+      <input type="number" id="rate" placeholder="10" min="0" max="1000" step="0.1" />
+      <span>%</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Мерзім</label>
+    <div class="periods">
+      <div class="period-btn active" data-months="1">1 ай</div>
+      <div class="period-btn" data-months="3">3 ай</div>
+      <div class="period-btn" data-months="6">6 ай</div>
+      <div class="period-btn" data-months="12">1 жыл</div>
+      <div class="period-btn" data-months="24">2 жыл</div>
+      <div class="period-btn" data-months="36">3 жыл</div>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">Есептеу →</button>
+</div>
+
+<div class="result" id="result">
+
+  <div class="result-main">
+    <div class="result-label">Соңғы сома</div>
+    <div class="result-amount" id="res-total">—</div>
+    <div class="result-sub" id="res-period">—</div>
+  </div>
+
+  <div class="result-grid">
+    <div class="result-card">
+      <div class="rc-label">Бастапқы сома</div>
+      <div class="rc-value" id="res-initial">—</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-label">Таза пайда</div>
+      <div class="rc-value green" id="res-profit">—</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-label">Айлық табыс</div>
+      <div class="rc-value green" id="res-monthly">—</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-label">Пайыз</div>
+      <div class="rc-value" id="res-rate">—</div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-title">Айлық есеп</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Ай</th>
+          <th>Баланс (₸)</th>
+          <th>Пайда (₸)</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <p class="note">* Күрделі пайыз (compound interest) есебімен.<br>Нарық жағдайы өзгеруі мүмкін.</p>
+
+</div>
+
+<script>
+  var selectedMonths = 1;
+
+  document.querySelectorAll('.period-btn').forEach(function(btn) {
+    btn.onclick = function() {
+      document.querySelectorAll('.period-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      selectedMonths = parseInt(btn.dataset.months);
+    };
+  });
+
+  function fmt(n) {
+    return Math.round(n).toLocaleString('ru-RU') + ' ₸';
+  }
+
+  function calculate() {
+    var amount = parseFloat(document.getElementById('amount').value);
+    var rate   = parseFloat(document.getElementById('rate').value);
+    var months = selectedMonths;
+
+    if (!amount || amount <= 0) {
+      document.getElementById('amount').focus();
+      document.getElementById('amount').style.borderColor = '#f59e0b';
+      return;
+    }
+    if (!rate || rate <= 0) {
+      document.getElementById('rate').focus();
+      document.getElementById('rate').style.borderColor = '#f59e0b';
+      return;
+    }
+
+    document.getElementById('amount').style.borderColor = '#e8ecf0';
+    document.getElementById('rate').style.borderColor   = '#e8ecf0';
+
+    var monthlyRate = rate / 100 / 12;
+    var balance = amount;
+    var rows = '';
+
+    for (var i = 1; i <= months; i++) {
+      var profit = balance * monthlyRate;
+      balance += profit;
+      rows += '<tr><td>' + i + '-ай</td><td>' + fmt(balance) + '</td><td class="green">+' + fmt(profit) + '</td></tr>';
+    }
+
+    var total   = balance;
+    var profit  = total - amount;
+    var monthly = profit / months;
+
+    var periodLabel = months === 1 ? '1 ай' : months === 12 ? '1 жыл' : months === 24 ? '2 жыл' : months === 36 ? '3 жыл' : months + ' ай';
+
+    document.getElementById('res-total').textContent   = fmt(total);
+    document.getElementById('res-period').textContent  = periodLabel + ' · ' + rate + '% жылдық';
+    document.getElementById('res-initial').textContent = fmt(amount);
+    document.getElementById('res-profit').textContent  = '+' + fmt(profit);
+    document.getElementById('res-monthly').textContent = '+' + fmt(monthly);
+    document.getElementById('res-rate').textContent    = rate + '%';
+    document.getElementById('table-body').innerHTML    = rows;
+
+    var el = document.getElementById('result');
+    el.classList.add('show');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+</body>
+</html>
