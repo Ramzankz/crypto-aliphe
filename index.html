@@ -261,6 +261,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rtxt{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:7px}
 .rres{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;background:rgba(29,158,117,.1);border-radius:6px;color:var(--gr);font-size:10px;font-weight:700}
 ::-webkit-scrollbar{width:0;height:0}
+/* NEW CALCULATOR */
+.nc-card{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nc-card-title{font-size:12px;font-weight:700;color:#8a9bb0;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.nc-field{margin-bottom:14px}
+.nc-field label{display:block;font-size:13px;color:#5a6a7e;margin-bottom:6px;font-weight:500}
+.nc-unit{position:relative}
+.nc-unit input{width:100%;padding:12px 44px 12px 16px;border:1.5px solid #e8ecf0;border-radius:12px;font-size:16px;color:#1a1a2e;outline:none;background:#f8fafc;box-sizing:border-box}
+.nc-unit input:focus{border-color:#1D9E75;background:#fff}
+.nc-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:#8a9bb0;font-weight:600}
+.nc-periods{display:flex;gap:6px;flex-wrap:wrap}
+.nc-period{flex:1;min-width:52px;padding:9px 4px;background:#f0f4f8;border:1.5px solid #e8ecf0;border-radius:10px;font-size:12px;font-weight:600;color:#5a6a7e;cursor:pointer;text-align:center;transition:all .2s}
+.nc-period.active{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.nc-calc-btn{width:100%;padding:15px;background:linear-gradient(135deg,#1D9E75,#5DCAA5);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:6px}
+.nc-result{display:none;margin-top:8px}
+.nc-result.show{display:block}
+.nc-result-main{background:linear-gradient(135deg,#0a1628,#0f2d1e);border-radius:16px;padding:20px;margin-bottom:10px;text-align:center}
+.nc-result-label{font-size:12px;color:#5DCAA5;margin-bottom:6px}
+.nc-result-amount{font-size:32px;font-weight:800;color:#fff;margin-bottom:3px}
+.nc-result-sub{font-size:12px;color:#7a9ab0}
+.nc-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.nc-result-card{background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nc-rc-label{font-size:10px;color:#8a9bb0;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.nc-rc-value{font-size:16px;font-weight:700;color:#1a1a2e}
+.nc-rc-value.green{color:#1D9E75}
+.nc-table-card{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow-x:auto;margin-bottom:10px}
+.nc-table-title{font-size:12px;font-weight:700;color:#8a9bb0;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+#nc-table-body td{font-size:12px;color:#1a1a2e;padding:9px 8px;border-bottom:1px solid #f8fafc}
+#nc-table-body td.green{color:#1D9E75;font-weight:600}
+#nc-table-body tr:last-child td{border-bottom:none}
+#nc-table-body th{font-size:11px;color:#8a9bb0;text-align:left;padding:6px 8px;border-bottom:1.5px solid #f0f4f8}
 </style>
 </head>
 <body>
@@ -344,36 +374,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <!-- CALC TAB -->
   <div class="tc" id="tc-calc">
-    <div class="slbl">💰 TON Калькулятор</div>
-    <div class="cs">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:12px">
-        <div style="font-size:12px;color:var(--t2);margin-bottom:9px">Инвестиция сомасын таңдаңыз (₸):</div>
-        <div class="agrid">
-          <div class="abtn" onclick="setAmt(100000,this)">100К</div>
-          <div class="abtn" onclick="setAmt(500000,this)">500К</div>
-          <div class="abtn on" onclick="setAmt(1000000,this)">1М</div>
-          <div class="abtn" onclick="setAmt(5000000,this)">5М</div>
+    <div style="background:linear-gradient(135deg,#0a1628,#0f2d1e);border-radius:14px;padding:16px;margin-bottom:12px;text-align:center">
+      <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:2px">🧮 Инвестиция Калькуляторы</div>
+      <div style="font-size:12px;color:#5DCAA5">Крипто Әліппе · @assila.crypto</div>
+    </div>
+    <div class="nc-card">
+      <div class="nc-card-title">Деректерді енгізіңіз</div>
+      <div class="nc-field">
+        <label>Депозит сомасы (₸)</label>
+        <div class="nc-unit"><input type="number" id="nc-amount" placeholder="500 000" min="0"/><span>₸</span></div>
+      </div>
+      <div class="nc-field">
+        <label>Жылдық пайыз (%)</label>
+        <div class="nc-unit"><input type="number" id="nc-rate" placeholder="10" min="0" max="1000" step="0.1"/><span>%</span></div>
+      </div>
+      <div class="nc-field">
+        <label>Мерзім</label>
+        <div class="nc-periods">
+          <div class="nc-period active" data-months="1">1 ай</div>
+          <div class="nc-period" data-months="3">3 ай</div>
+          <div class="nc-period" data-months="6">6 ай</div>
+          <div class="nc-period" data-months="12">1 жыл</div>
+          <div class="nc-period" data-months="24">2 жыл</div>
+          <div class="nc-period" data-months="36">3 жыл</div>
         </div>
-        <div class="ciw"><input type="number" id="calc-inp" value="1000000" oninput="calcUpd()"><span class="csuf">₸</span></div>
-        <div style="font-size:10px;color:var(--t3);text-align:center">* TON ≈ $3.50 | 1 USD ≈ 450 ₸ — болжамды баға</div>
       </div>
-      <div class="ccards">
-        <div class="ccard"><div class="cc-i">💎</div><div class="cc-v" id="cr-ton">—</div><div class="cc-l">TON аласыз</div></div>
-        <div class="ccard"><div class="cc-i">📈</div><div class="cc-v">5.5%</div><div class="cc-l">Жылдық APY</div></div>
-        <div class="ccard"><div class="cc-i">📅</div><div class="cc-v" id="cr-mo">—</div><div class="cc-l">Айлық табыс ₸</div></div>
-        <div class="ccard"><div class="cc-i">🎯</div><div class="cc-v" id="cr-yr">—</div><div class="cc-l">Жылдық табыс ₸</div></div>
-        <div class="ccard full"><div style="font-size:12px;color:var(--t2);margin-bottom:3px">3 жылдан кейін болжам</div><div class="cc-v" style="font-size:24px;color:var(--gr)" id="cr-3y">—</div><div class="cc-l">Стейкинг + баға өсімі (+30%)</div></div>
+      <button class="nc-calc-btn" onclick="ncCalculate()">Есептеу →</button>
+    </div>
+    <div class="nc-result" id="nc-result">
+      <div class="nc-result-main">
+        <div class="nc-result-label">Соңғы сома</div>
+        <div class="nc-result-amount" id="nc-total">—</div>
+        <div class="nc-result-sub" id="nc-period-label">—</div>
       </div>
+      <div class="nc-result-grid">
+        <div class="nc-result-card"><div class="nc-rc-label">Бастапқы сома</div><div class="nc-rc-value" id="nc-initial">—</div></div>
+        <div class="nc-result-card"><div class="nc-rc-label">Таза пайда</div><div class="nc-rc-value green" id="nc-profit">—</div></div>
+        <div class="nc-result-card"><div class="nc-rc-label">Айлық табыс</div><div class="nc-rc-value green" id="nc-monthly">—</div></div>
+        <div class="nc-result-card"><div class="nc-rc-label">Пайыз</div><div class="nc-rc-value" id="nc-rate-show">—</div></div>
+      </div>
+      <div class="nc-table-card">
+        <div class="nc-table-title">Айлық есеп</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr>
+            <th>Ай</th><th>Баланс (₸)</th><th>Пайда (₸)</th>
+          </tr></thead>
+          <tbody id="nc-table-body"></tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:#8a9bb0;text-align:center;margin-bottom:12px;line-height:1.5">* Күрделі пайыз (compound interest) есебімен.<br>Нарық жағдайы өзгеруі мүмкін.</p>
     </div>
-    <div class="slbl" style="padding-top:4px">⚖️ Инвестиция салыстырмасы</div>
-    <div class="ctbl">
-      <div class="chdr"><span>Құрал</span><span>%/жыл</span><span>Айлық ₸</span><span>Жылдық ₸</span></div>
-      <div class="crow"><span>💎 TON стейкинг</span><span class="chi">5.5%</span><span class="chi" id="ct-ton-m">—</span><span class="chi" id="ct-ton-y">—</span></div>
-      <div class="crow"><span>🏦 Банк депозит</span><span>11%</span><span id="ct-bk-m">—</span><span id="ct-bk-y">—</span></div>
-      <div class="crow"><span>🥇 Алтын</span><span>6%</span><span id="ct-gd-m">—</span><span id="ct-gd-y">—</span></div>
-      <div class="crow"><span>💵 USD ұстау</span><span class="crd">0%</span><span class="crd">0 ₸</span><span class="crd">0 ₸</span></div>
-    </div>
-    <div style="padding:8px 12px;font-size:10px;color:var(--t3);text-align:center">* Болжамды мәліметтер. Нарық жағдайы өзгеруі мүмкін.</div>
   </div>
   <!-- AI TAB -->
   <div class="tc" id="tc-ai" style="display:flex;flex-direction:column">
@@ -733,24 +783,39 @@ function checkLvUp(){
 }
 
 // CALCULATOR
-function setAmt(v,btn){
-  document.getElementById('calc-inp').value=v;
-  document.querySelectorAll('.abtn').forEach(function(b){b.className='abtn';});
-  btn.className='abtn on';calcUpd();
-}
-function calcUpd(){
-  var k=parseFloat(document.getElementById('calc-inp').value)||0;
-  var ton=k/450/3.5,yr=ton*0.055*3.5*450,mo=yr/12,y3=k+yr*3+k*0.3;
-  document.getElementById('cr-ton').textContent=ton.toFixed(1)+' TON';
-  document.getElementById('cr-mo').textContent=fmt(mo)+' ₸';
-  document.getElementById('cr-yr').textContent=fmt(yr)+' ₸';
-  document.getElementById('cr-3y').textContent=fmt(y3)+' ₸';
-  document.getElementById('ct-ton-m').textContent=fmt(mo)+' ₸';
-  document.getElementById('ct-ton-y').textContent=fmt(yr)+' ₸';
-  document.getElementById('ct-bk-m').textContent=fmt(k*0.11/12)+' ₸';
-  document.getElementById('ct-bk-y').textContent=fmt(k*0.11)+' ₸';
-  document.getElementById('ct-gd-m').textContent=fmt(k*0.06/12)+' ₸';
-  document.getElementById('ct-gd-y').textContent=fmt(k*0.06)+' ₸';
+var ncMonths=1;
+document.querySelectorAll('.nc-period').forEach(function(btn){
+  btn.onclick=function(){
+    document.querySelectorAll('.nc-period').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    ncMonths=parseInt(btn.dataset.months);
+  };
+});
+function ncFmt(n){return Math.round(n).toLocaleString('ru-RU')+' ₸';}
+function ncCalculate(){
+  var amount=parseFloat(document.getElementById('nc-amount').value);
+  var rate=parseFloat(document.getElementById('nc-rate').value);
+  var months=ncMonths;
+  var ai=document.getElementById('nc-amount'),ri=document.getElementById('nc-rate');
+  if(!amount||amount<=0){ai.style.borderColor='#f59e0b';ai.focus();return;}
+  if(!rate||rate<=0){ri.style.borderColor='#f59e0b';ri.focus();return;}
+  ai.style.borderColor='#e8ecf0';ri.style.borderColor='#e8ecf0';
+  var monthlyRate=rate/100/12,balance=amount,rows='';
+  for(var i=1;i<=months;i++){
+    var p=balance*monthlyRate;balance+=p;
+    rows+='<tr><td>'+i+'-ай</td><td>'+ncFmt(balance)+'</td><td class="green">+'+ncFmt(p)+'</td></tr>';
+  }
+  var totalProfit=balance-amount,monthly=totalProfit/months;
+  var pl=months===1?'1 ай':months===12?'1 жыл':months===24?'2 жыл':months===36?'3 жыл':months+' ай';
+  document.getElementById('nc-total').textContent=ncFmt(balance);
+  document.getElementById('nc-period-label').textContent=pl+' · '+rate+'% жылдық';
+  document.getElementById('nc-initial').textContent=ncFmt(amount);
+  document.getElementById('nc-profit').textContent='+'+ncFmt(totalProfit);
+  document.getElementById('nc-monthly').textContent='+'+ncFmt(monthly);
+  document.getElementById('nc-rate-show').textContent=rate+'%';
+  document.getElementById('nc-table-body').innerHTML=rows;
+  var el=document.getElementById('nc-result');el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function fmt(n){return n>=1e6?(n/1e6).toFixed(1)+'М':n>=1000?Math.round(n).toLocaleString('ru-RU'):Math.round(n).toString();}
 
@@ -813,7 +878,6 @@ function toast(msg){
 }
 
 // INIT
-calcUpd();
 if(S.name){goMain();}
 </script>
 </body>
