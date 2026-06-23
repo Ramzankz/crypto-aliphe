@@ -2,7 +2,7 @@
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0a0a15">
 <title>Крипто Әліппе</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -180,8 +180,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .crd{color:var(--red)!important}
 
 /* AI CHAT */
-.cmsgs{padding:12px;display:flex;flex-direction:column;gap:10px;min-height:200px}
-.cm{max-width:85%;padding:10px 12px;border-radius:13px;font-size:13px;line-height:1.5}
+.cmsgs{padding:12px;display:flex;flex-direction:column;gap:10px;min-height:200px;overflow-y:auto;flex:1}
+.cm{max-width:85%;padding:10px 12px;border-radius:13px;font-size:13px;line-height:1.5;word-break:break-word;overflow-wrap:anywhere;white-space:normal}
 .cm.bot{background:var(--card2);border-bottom-left-radius:3px;align-self:flex-start;border:1px solid var(--border)}
 .cm.usr{background:linear-gradient(135deg,var(--gr),var(--bl));color:#fff;border-bottom-right-radius:3px;align-self:flex-end}
 .typing{display:flex;gap:4px;align-items:center;padding:10px 12px;background:var(--card2);border-radius:13px;border-bottom-left-radius:3px;width:52px;border:1px solid var(--border);align-self:flex-start}
@@ -314,7 +314,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="wb-sdiv"></div>
     <div class="wb-stat"><b>13+</b><span>жыл тәжірибе</span></div>
     <div class="wb-sdiv"></div>
-    <div class="wb-stat"><b>350К</b><span>толық курс</span></div>
+    <div class="wb-stat"><b>350К ₸</b><span>курс бағасы</span></div>
   </div>
   <div class="wb-free">🎁 1-2 сабақ тегін — қазір бастаңыз!</div>
   <div class="wb-cta">
@@ -426,7 +426,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
   <!-- AI TAB -->
-  <div class="tc" id="tc-ai" style="display:flex;flex-direction:column">
+  <div class="tc" id="tc-ai">
     <div class="cmsgs" id="chat-msgs">
       <div class="cm bot fa">Сәлем! Мен — Крипто Әліппе AI 🤖<br><br>Крипто туралы кез-келген сұрақты қазақша жазыңыз!</div>
     </div>
@@ -585,8 +585,8 @@ var LVS=['Crypto Beginner','Crypto Explorer','Crypto Investor','TON Specialist',
 
 // STATE
 var S={done:[],streak:0,lastDate:null,paid:false,name:'',xp:0,lv:1};
-(function(){try{var d=localStorage.getItem('ca_v9');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}})();
-function save(){try{localStorage.setItem('ca_v9',JSON.stringify(S));}catch(e){}}
+(function(){try{var d=localStorage.getItem('ca_v10');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}})();
+function save(){try{localStorage.setItem('ca_v10',JSON.stringify(S));}catch(e){}}
 
 // PAGE NAVIGATION
 function showPg(id){
@@ -607,6 +607,13 @@ function goMain(){
   }catch(e){}
   save();
   showPg('pg-main');
+  // Initially show lessons tab properly
+  ['lessons','calc','ai','sec','cab'].forEach(function(t){
+    var el=document.getElementById('tc-'+t);
+    if(el){el.style.display='none';}
+  });
+  var lt=document.getElementById('tc-lessons');
+  if(lt){lt.style.display='block';}
   renderLessons();renderStats();renderAchs();updateCabinet();
 }
 function submitLead(){
@@ -694,15 +701,13 @@ function buildVideo(vid){
 }
 
 function playVid(vid){
-  var el=document.getElementById('vb_'+vid);
-  if(!el)return;
-  // Telegram Mini App — iframe ішінде ойнайды
-  // file:// протоколда — YouTube-та ашылады
-  if(location.protocol==='file:'){
-    window.open('https://www.youtube.com/watch?v='+vid,'_blank');
-    return;
-  }
-  el.outerHTML='<div class="vframe"><iframe src="https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>';
+  var url='https://www.youtube.com/watch?v='+vid;
+  try{
+    if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.openLink){
+      window.Telegram.WebApp.openLink(url);return;
+    }
+  }catch(e){}
+  window.open(url,'_blank');
 }
 
 function markDone(num){
@@ -742,13 +747,17 @@ function checkCode(){
 // TABS
 function switchTab(name,btn){
   ['lessons','calc','ai','sec','cab'].forEach(function(t){
-    document.getElementById('tc-'+t).className='tc';
+    var el=document.getElementById('tc-'+t);
+    el.className='tc';
+    el.style.display='none';
     document.getElementById('tb-'+t).className='tbtn';
   });
-  document.getElementById('tc-'+name).className='tc on';
+  var active=document.getElementById('tc-'+name);
+  active.className='tc on';
+  active.style.display=(name==='ai')?'flex':'block';
+  if(name==='ai')active.style.flexDirection='column';
   btn.className='tbtn on';
-  if(name==='calc')calcUpd();
-  if(name==='cab'){renderAchs();updateCabinet();}
+  if(name==='cab'){renderAchs();updateCabinet();renderStats();}
 }
 
 // STATS & ACHIEVEMENTS
