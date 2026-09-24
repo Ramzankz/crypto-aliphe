@@ -3,9 +3,21 @@
 **@assila.crypto** крипто обучение платформасы
 
 ## Файлдар
-- `index.html` — негізгі бет
-- `style.css` — дизайн
-- `app.js` — логика
+- `index.html` — негізгі бет (дизайн мен логика осы файлдың ішінде)
+- `calculator.html` — жеке инвестиция калькуляторы
+- `kaspi-qr.jpg` — Kaspi QR суреті
+- `api/check-code.js` — кіру кодын серверде тексеретін Vercel функциясы
+
+## Кіру кодтары (ACCESS_CODES)
+Кодтар кодтың ішінде сақталмайды. Олар Vercel-дегі **environment variable** ішінде тұрады:
+
+1. vercel.com → жобаңыз (`crypto-aliphe`) → **Settings** → **Environment Variables**
+2. **Key:** `ACCESS_CODES`
+3. **Value:** барлық кодтар үтір арқылы, мысалы: `ASSILA-2024-XXXX,ASSILA-2024-YYYY`
+4. **Environments:** Production, Preview, Development — үшеуін де белгілеңіз → **Save**
+5. **Deployments** → соңғы деплой → **⋯** → **Redeploy** (өзгеріс тек қайта деплойдан кейін күшіне енеді)
+
+Жаңа код қосу үшін: осы мәнді өңдеп, соңына `,ЖАҢА-КОД` қосыңыз да, қайта Redeploy жасаңыз.
 
 ## Vercel-ге деплой (5 минут)
 
